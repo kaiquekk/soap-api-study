@@ -1,0 +1,22 @@
+{
+  "name": "soap-api-study",
+  "version": "1.0.0",
+  "description": "Repository with a simple SOAP API for studying purposes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaiquekk/soap-api-study.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaiquekk/soap-api-study/issues"
+  },
+  "homepage": "https://github.com/kaiquekk/soap-api-study#readme",
+  "dependencies": {
+    "soap": "^0.30.0"
+  }
+}
