@@ -1,0 +1,12 @@
+doctype html
+head
+  title Pug
+  
+h1 Result
+#container.col
+  p Type:
+    label#cType=type
+  p Valid:
+    label#cValid=valid  
+  form(method='GET' action='/main')
+    input(type='submit' value='Return')

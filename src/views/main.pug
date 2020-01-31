@@ -1,0 +1,11 @@
+doctype html
+head
+  title Pug
+  
+h1 Credit Card Checker
+#container.col
+  form(method='POST' action='/main/check')
+    label(for='number')
+    b Card Number:
+    input#numInpt(type='text' name='number')
+    input(type='submit' value='Check Card')
