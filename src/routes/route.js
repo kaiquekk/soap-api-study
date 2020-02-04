@@ -9,6 +9,7 @@ main.all('/', function (req, res) {
 });
 
 main.all('/check', function (req, res) {
+    /* Urls for calling the real service and for mocking, respectively. Uncomment and comment according to use. */
     // const wsdlUrl = 'https://ws.cdyne.com/creditcardverify/luhnchecker.asmx?wsdl';
     const wsdlUrl = 'http://localhost:8088/'
    
@@ -28,13 +29,13 @@ main.all('/check', function (req, res) {
     (async () =>{
         const {response} = await soapRequest({url: wsdlUrl, headers: opt, xml: xml, timeout: 1000});
         const {headers, body, statusCode } = response;
-        let typeStart = body.search('<ws:CardType>');
-        let typeEnd = body.search('</ws:CardType>');
-        let validStart = body.search('<ws:CardValid>');
-        let validEnd = body.search('</ws:CardValid>');
-        let type = body.substring(typeStart+13, typeEnd);
+        let typeStart = body.search('<CardType>');
+        let typeEnd = body.search('</CardType>');
+        let validStart = body.search('<CardValid>');
+        let validEnd = body.search('</CardValid>');
+        let type = body.substring(typeStart+10, typeEnd);
         let valid;
-        if(body.substring(validStart+14, validEnd)) valid = 'Yes';
+        if(body.substring(validStart+11, validEnd)) valid = 'Yes';
         else valid = 'No';
         res.status(200);
         res.render('check', { type: type, valid: valid });
