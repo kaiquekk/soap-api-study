@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="00362922-02af-4226-996b-15a805fde4d2" activeEnvironment="Default" name="CCCheck" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="e6c0ff7e-6fd5-4334-be5f-ea4e1ddbda58" wsaVersion="NONE" name="LuhnCheckerSoap12" type="wsdl" bindingName="{http://ws.cdyne.com/}LuhnCheckerSoap12" soapVersion="1_2" anonymous="optional" definition="file:/C:/Users/kaique.komata/Documents/soap-api-study/teste/luhnchecker.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/kaique.komata/Documents/soap-api-study/teste/luhnchecker.xml"><con:part><con:url>file:/C:/Users/kaique.komata/Documents/soap-api-study/teste/luhnchecker.xml</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://ws.cdyne.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ws.cdyne.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>Validates Credit Cards to ensure proper input. This is a FREE CDYNE service ran off of our secure servers. You may use it as much as you wish. If you would like the code please visit
+&lt;a href="http://wiki.cdyne.com/wiki/index.php?title=Credit_Card_Verification">our wiki&lt;/a></wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ws.cdyne.com/">
+      <s:element name="CheckCC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CardNumber" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckCCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckCCResult" type="tns:ReturnIndicator"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ReturnIndicator">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CardType" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="CardValid" type="s:boolean"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReturnIndicator" nillable="true" type="tns:ReturnIndicator"/>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CheckCCSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckCC"/>
+  </wsdl:message>
+  <wsdl:message name="CheckCCSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckCCResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CheckCCHttpGetIn">
+    <wsdl:part name="CardNumber" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="CheckCCHttpGetOut">
+    <wsdl:part name="Body" element="tns:ReturnIndicator"/>
+  </wsdl:message>
+  <wsdl:message name="CheckCCHttpPostIn">
+    <wsdl:part name="CardNumber" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="CheckCCHttpPostOut">
+    <wsdl:part name="Body" element="tns:ReturnIndicator"/>
+  </wsdl:message>
+  <wsdl:portType name="LuhnCheckerSoap">
+    <wsdl:operation name="CheckCC">
+      <wsdl:documentation>Enter 4111111111111111 to test a good credit card number.</wsdl:documentation>
+      <wsdl:input message="tns:CheckCCSoapIn"/>
+      <wsdl:output message="tns:CheckCCSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="LuhnCheckerHttpGet">
+    <wsdl:operation name="CheckCC">
+      <wsdl:documentation>Enter 4111111111111111 to test a good credit card number.</wsdl:documentation>
+      <wsdl:input message="tns:CheckCCHttpGetIn"/>
+      <wsdl:output message="tns:CheckCCHttpGetOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="LuhnCheckerHttpPost">
+    <wsdl:operation name="CheckCC">
+      <wsdl:documentation>Enter 4111111111111111 to test a good credit card number.</wsdl:documentation>
+      <wsdl:input message="tns:CheckCCHttpPostIn"/>
+      <wsdl:output message="tns:CheckCCHttpPostOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LuhnCheckerSoap" type="tns:LuhnCheckerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CheckCC">
+      <soap:operation soapAction="http://ws.cdyne.com/CheckCC" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LuhnCheckerSoap12" type="tns:LuhnCheckerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CheckCC">
+      <soap12:operation soapAction="http://ws.cdyne.com/CheckCC" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LuhnCheckerHttpGet" type="tns:LuhnCheckerHttpGet">
+    <http:binding verb="GET"/>
+    <wsdl:operation name="CheckCC">
+      <http:operation location="/CheckCC"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LuhnCheckerHttpPost" type="tns:LuhnCheckerHttpPost">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="CheckCC">
+      <http:operation location="/CheckCC"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LuhnChecker">
+    <wsdl:documentation>Validates Credit Cards to ensure proper input. This is a FREE CDYNE service ran off of our secure servers. You may use it as much as you wish. If you would like the code please visit
+&lt;a href="http://wiki.cdyne.com/wiki/index.php?title=Credit_Card_Verification">our wiki&lt;/a></wsdl:documentation>
+    <wsdl:port name="LuhnCheckerSoap" binding="tns:LuhnCheckerSoap">
+      <soap:address location="https://ws.cdyne.com/creditcardverify/luhnchecker.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="LuhnCheckerSoap12" binding="tns:LuhnCheckerSoap12">
+      <soap12:address location="https://ws.cdyne.com/creditcardverify/luhnchecker.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="LuhnCheckerHttpGet" binding="tns:LuhnCheckerHttpGet">
+      <http:address location="https://ws.cdyne.com/creditcardverify/luhnchecker.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="LuhnCheckerHttpPost" binding="tns:LuhnCheckerHttpPost">
+      <http:address location="https://ws.cdyne.com/creditcardverify/luhnchecker.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://ws.cdyne.com/creditcardverify/luhnchecker.asmx</con:endpoint></con:endpoints><con:operation id="04022f19-9fab-4beb-a0ad-e6fa295832d4" isOneWay="false" action="http://ws.cdyne.com/CheckCC" name="CheckCC" bindingOperationName="CheckCC" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false"><con:settings/></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="7b0afb3c-a5fc-41ee-9a03-d0a711522e91" wsaVersion="NONE" name="LuhnCheckerSoap" type="wsdl" bindingName="{http://ws.cdyne.com/}LuhnCheckerSoap" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/kaique.komata/Documents/soap-api-study/teste/luhnchecker.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\kaique.komata\Documents\soap-api-study\teste\luhnchecker.xml"><con:part><con:url>file:\C:\Users\kaique.komata\Documents\soap-api-study\teste\luhnchecker.xml</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://ws.cdyne.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ws.cdyne.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>Validates Credit Cards to ensure proper input. This is a FREE CDYNE service ran off of our secure servers. You may use it as much as you wish. If you would like the code please visit
+&lt;a href="http://wiki.cdyne.com/wiki/index.php?title=Credit_Card_Verification">our wiki&lt;/a></wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ws.cdyne.com/">
+      <s:element name="CheckCC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CardNumber" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckCCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckCCResult" type="tns:ReturnIndicator"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ReturnIndicator">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CardType" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="CardValid" type="s:boolean"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReturnIndicator" nillable="true" type="tns:ReturnIndicator"/>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CheckCCSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckCC"/>
+  </wsdl:message>
+  <wsdl:message name="CheckCCSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckCCResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CheckCCHttpGetIn">
+    <wsdl:part name="CardNumber" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="CheckCCHttpGetOut">
+    <wsdl:part name="Body" element="tns:ReturnIndicator"/>
+  </wsdl:message>
+  <wsdl:message name="CheckCCHttpPostIn">
+    <wsdl:part name="CardNumber" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="CheckCCHttpPostOut">
+    <wsdl:part name="Body" element="tns:ReturnIndicator"/>
+  </wsdl:message>
+  <wsdl:portType name="LuhnCheckerSoap">
+    <wsdl:operation name="CheckCC">
+      <wsdl:documentation>Enter 4111111111111111 to test a good credit card number.</wsdl:documentation>
+      <wsdl:input message="tns:CheckCCSoapIn"/>
+      <wsdl:output message="tns:CheckCCSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="LuhnCheckerHttpGet">
+    <wsdl:operation name="CheckCC">
+      <wsdl:documentation>Enter 4111111111111111 to test a good credit card number.</wsdl:documentation>
+      <wsdl:input message="tns:CheckCCHttpGetIn"/>
+      <wsdl:output message="tns:CheckCCHttpGetOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="LuhnCheckerHttpPost">
+    <wsdl:operation name="CheckCC">
+      <wsdl:documentation>Enter 4111111111111111 to test a good credit card number.</wsdl:documentation>
+      <wsdl:input message="tns:CheckCCHttpPostIn"/>
+      <wsdl:output message="tns:CheckCCHttpPostOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LuhnCheckerSoap" type="tns:LuhnCheckerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CheckCC">
+      <soap:operation soapAction="http://ws.cdyne.com/CheckCC" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LuhnCheckerSoap12" type="tns:LuhnCheckerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CheckCC">
+      <soap12:operation soapAction="http://ws.cdyne.com/CheckCC" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LuhnCheckerHttpGet" type="tns:LuhnCheckerHttpGet">
+    <http:binding verb="GET"/>
+    <wsdl:operation name="CheckCC">
+      <http:operation location="/CheckCC"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LuhnCheckerHttpPost" type="tns:LuhnCheckerHttpPost">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="CheckCC">
+      <http:operation location="/CheckCC"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LuhnChecker">
+    <wsdl:documentation>Validates Credit Cards to ensure proper input. This is a FREE CDYNE service ran off of our secure servers. You may use it as much as you wish. If you would like the code please visit
+&lt;a href="http://wiki.cdyne.com/wiki/index.php?title=Credit_Card_Verification">our wiki&lt;/a></wsdl:documentation>
+    <wsdl:port name="LuhnCheckerSoap" binding="tns:LuhnCheckerSoap">
+      <soap:address location="https://ws.cdyne.com/creditcardverify/luhnchecker.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="LuhnCheckerSoap12" binding="tns:LuhnCheckerSoap12">
+      <soap12:address location="https://ws.cdyne.com/creditcardverify/luhnchecker.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="LuhnCheckerHttpGet" binding="tns:LuhnCheckerHttpGet">
+      <http:address location="https://ws.cdyne.com/creditcardverify/luhnchecker.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="LuhnCheckerHttpPost" binding="tns:LuhnCheckerHttpPost">
+      <http:address location="https://ws.cdyne.com/creditcardverify/luhnchecker.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://kaiquekom-pc:8088/mockLuhnCheckerSoap</con:endpoint><con:endpoint>http://localhost:8088/mockLuhnCheckerSoap?WSDL</con:endpoint><con:endpoint>https://ws.cdyne.com/creditcardverify/luhnchecker.asmx</con:endpoint></con:endpoints><con:operation id="1a9eee92-d1c4-4865-8ccd-e26cc91d381e" isOneWay="false" action="http://ws.cdyne.com/CheckCC" name="CheckCC" bindingOperationName="CheckCC" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="240fe666-ac6a-454a-9d8e-f977337d9fe3" name="noneReq"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8088/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.cdyne.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ws:CheckCC>\r
+         <!--Optional:-->\r
+         <ws:CardNumber>123</ws:CardNumber>\r
+      </ws:CheckCC>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.cdyne.com/CheckCC"/><con:wsrmConfig version="1.2"/></con:call><con:call id="3ce1db91-e559-46a1-ab1a-dfddcdb01e07" name="visaReq"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8088/main/check</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CheckCC xmlns="http://ws.cdyne.com/">
+      <CardNumber>4111111111111111</CardNumber>
+    </CheckCC>
+  </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.cdyne.com/CheckCC"/><con:wsrmConfig version="1.2"/></con:call><con:call id="8d32f024-c142-4825-97ee-2c5ae74daa68" name="masterReq"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8088/</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CheckCC xmlns="http://ws.cdyne.com/">
+      <CardNumber>5221007200653909</CardNumber>
+    </CheckCC>
+  </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.cdyne.com/CheckCC"/><con:wsrmConfig version="1.2"/></con:call><con:call id="b483befd-8d95-4d43-81b2-c4913b4ac2d6" name="unknownReq"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8088/</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CheckCC xmlns="http://ws.cdyne.com/">
+      <CardNumber>7845125498543201</CardNumber>
+    </CheckCC>
+  </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.cdyne.com/CheckCC"/><con:wsrmConfig version="1.2"/></con:call><con:call id="d5d50b31-b3df-432d-a601-429a8fca9231" name="americanReq"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:4545/main/check</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CheckCC xmlns="http://ws.cdyne.com/">
+      <CardNumber>323545681541985</CardNumber>
+    </CheckCC>
+  </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.cdyne.com/CheckCC"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService id="763cdc88-c6b1-4dba-9da4-24499af75650" port="8088" path="/" host="localhost" name="LuhnCheckerSoap MockService" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="CheckCC" id="b6d2c659-5431-4b99-8977-e53984d4d2b9" interface="LuhnCheckerSoap" operation="CheckCC"><con:settings/><con:defaultResponse>noneRes</con:defaultResponse><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchPath>import javax.xml.xpath.*;
+import groovy.xml.StreamingMarkupBuilder;
+import groovy.lang.Binding;
+import groovy.lang.Script;
+def util = new com.eviware.soapui.support.GroovyUtils( context );
+def xml = new XmlSlurper().parseText(mockRequest.requestContent);
+def card = xml.Body.CheckCC.CardNumber;
+def str = card.toString();
+def len = str.size();
+if(len &lt; 15 || len > 16){
+	context.ResultResponse = "noneRes";
+}
+else{
+	switch(str.substring(0,1)){
+		case '4': context.ResultResponse = "visaRes"; break;
+		case '5': context.ResultResponse = "masterRes"; break;
+		case '3': context.ResultResponse = "americanRes"; break;
+		default: context.ResultResponse = "unknownRes";	
+	}
+}</con:dispatchPath><con:response name="noneRes" id="a7ba8ed2-2ed7-46d9-9ca3-db63b23298c0" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.cdyne.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:CheckCCResponse>
+         <ws:CheckCCResult>
+            <ws:CardType>NONE</ws:CardType>
+            <ws:CardValid>false</ws:CardValid>
+         </ws:CheckCCResult>
+      </ws:CheckCCResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.cdyne.com/CheckCC"/></con:response><con:response name="visaRes" id="8ad137e6-324c-49ed-a5c7-954e23da2b77" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.cdyne.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:CheckCCResponse>
+         <ws:CheckCCResult>
+            <ws:CardType>VISA</ws:CardType>
+            <ws:CardValid>true</ws:CardValid>
+         </ws:CheckCCResult>
+      </ws:CheckCCResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.cdyne.com/CheckCC"/></con:response><con:response name="masterRes" id="e35185ec-222a-450b-9129-20fbeb894b40" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.cdyne.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:CheckCCResponse>
+         <ws:CheckCCResult>
+            <ws:CardType>MASTERCARD</ws:CardType>
+            <ws:CardValid>true</ws:CardValid>
+         </ws:CheckCCResult>
+      </ws:CheckCCResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.cdyne.com/CheckCC"/></con:response><con:response name="unknownRes" id="ba0de077-c2aa-411e-b8d8-d0df0ba3ac29" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.cdyne.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:CheckCCResponse>
+         <ws:CheckCCResult>
+            <ws:CardType>UNKNOWN</ws:CardType>
+            <ws:CardValid>true</ws:CardValid>
+         </ws:CheckCCResult>
+      </ws:CheckCCResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.cdyne.com/CheckCC"/></con:response><con:response name="americanRes" id="9ee291c0-cc66-4a08-a229-fc48f5d21227" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.cdyne.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:CheckCCResponse>
+         <!--Optional:-->
+         <ws:CheckCCResult>
+            <!--Optional:-->
+            <ws:CardType>AMERICAN EXPRESS</ws:CardType>
+            <ws:CardValid>true</ws:CardValid>
+         </ws:CheckCCResult>
+      </ws:CheckCCResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.cdyne.com/CheckCC"/></con:response><con:dispatchConfig xsi:type="con:MockOperationQueryMatchDispatch" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:query><con:name>q1</con:name></con:query></con:dispatchConfig></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
